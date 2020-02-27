@@ -1,0 +1,55 @@
+canvas {
+    border : 1px solid;
+    margin : 0 auto;
+    width : 100%;
+    display : block;
+    background-color : black;
+}
+
+header {
+    background-color: red;
+    color: white;
+    text-align:center;
+    padding:0.2em;
+    font-family: arial;
+    font-weight: bold;
+    height: 1.4rem;
+    white-space: normal;
+}
+
+body{
+    background-color : white;
+
+}
+
+#game-over{
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    position: absolute;
+    display: none;
+
+}
+
+#winner{
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    position: absolute;
+    display: none;
+}
+
+
+#start{
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    position: absolute; background-color: red;
+    border: none;
+    color: white;
+    border-radius: 1rem;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5em;
+}
