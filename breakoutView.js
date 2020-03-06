@@ -1,10 +1,19 @@
 function breakoutView() {
+
     let str = document.getElementById("start"), canvas = document.getElementById("myCanvas"),
         context = canvas.getContext("2d");
-    let ballRadius = 15, x = canvas.width / 2, y = canvas.height - 30,
-        dx = 5, dy = -5, pongH = 20, pongW = 150, pongX = (canvas.width - pongW) / 2, blockWidth = 50,
-        blockHeight = 20, blockPadding = 12, topBlockOffset = 40, rightTilt = false, leftTilt = false,
-        blockRows = 4, blockColumns = 12, leftBlockOffset = 40, noBlocks = 48, gmCounter = 0, colour = 0,
+    context.translate(0.5, 0.5);
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight - 25;
+    };
+
+    let ballRadius = 6, x = canvas.width / 2, y = 400,
+        dx = 3, dy = -3, pongH = 12, pongW = 75, pongX = (window.innerWidth - pongW) / 2,
+        blockHeight = 10, blockPadding = 2, blockWidth = Math.round((window.innerWidth / 14) + blockPadding),
+        topBlockOffset = 5, rightTilt = false, leftTilt = false,
+        blockRows = 4, blockColumns = 12, leftBlockOffset = 0, noBlocks = 48, gmCounter = 0, colour = 0,
         drawCalls = 0, blocks = [];
 
     for (let row = 0; row < blockRows; row++) {
@@ -15,7 +24,19 @@ function breakoutView() {
                 status: 1
             });
         }
-    }
+    };
+
+    function start() {
+        showHideStart();
+        setInterval(draw, 10)
+    };
+
+
+    function showHideStart() {
+        if (str.style.display === "inline-block") {
+            str.style.display = "none";
+        }
+    };
 
     function drawBall() {
         context.beginPath();
@@ -23,7 +44,7 @@ function breakoutView() {
         context.fillStyle = "#ff0000";
         context.fill();
         context.closePath();
-    }
+    };
 
 
     function drawBlocks() {
@@ -64,8 +85,8 @@ function breakoutView() {
                 context.closePath();
 
             }
-        });
-    }
+        })
+    };
 
     function impact() {
         blocks.forEach(function (blk) {
@@ -80,7 +101,7 @@ function breakoutView() {
                 noBlocks -= 1
             }
         });
-    }
+    };
 
     function drawPong() {
         context.beginPath();
@@ -88,18 +109,6 @@ function breakoutView() {
         context.fillStyle = "#FF8C00";
         context.fill();
         context.closePath();
-    }
-
-
-    function start() {
-        showHideStart();
-        setInterval(draw, 10)
-    };
-
-    function showHideStart() {
-        if (str.style.display === "inline-block") {
-            str.style.display = "none";
-        }
     };
 
     function draw() {
@@ -127,7 +136,7 @@ function breakoutView() {
         }
 
         if (gameOver()) {
-            gmCounter += 1
+            gmCounter += 2
             if (gmCounter <= 100) {
                 if (gmCounter % 10 == 0 && noBlocks == 0) {
                     displayWinner();
@@ -147,7 +156,7 @@ function breakoutView() {
             } else {
                 gmOver.style.display = "none";
             }
-        }
+        };
 
         function displayWinner() {
             let win = document.getElementById("winner")
@@ -156,35 +165,49 @@ function breakoutView() {
             } else {
                 win.style.display = "none";
             }
-        }
+        };
 
         function hitPong() {
             return bottomHit() && ballOnPong();
-        }
+        };
 
         function ballOnPong() {
             return x > pongX && x < pongX + pongW;
-        }
+        };
 
         function topHit() {
             return y + dy < ballRadius;
-        }
+        };
 
         function bottomHit() {
             return y + dy > canvas.height - ballRadius;
-        }
+        };
 
         function gameOver() {
             return bottomHit() && !ballOnPong();
-        }
+        };
 
         function sideHit() {
             return x + dx > canvas.width - ballRadius || x + dx < ballRadius;
-        }
+        };
 
-        // Limiting lag when using event listener
+
+        // Limiting lag when using event listener to update display
         if (drawCalls % 50 == 0) {
-            window.addEventListener("deviceorientation", handleOrientation, true);
+
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                // iOS 13+
+                DeviceOrientationEvent.requestPermission()
+                    .then(response => {
+                        if (response == 'granted') {
+                            window.addEventListener("deviceorientation", handleOrientation, true);
+                        }
+                    })
+                    .catch(console.error)
+            } else {
+                // non iOS 13+, i.e < iOS 13 and Android etc.
+                window.addEventListener("deviceorientation", handleOrientation, true);
+            }
         }
 
         function handleOrientation(event) {
@@ -203,11 +226,12 @@ function breakoutView() {
         x += dx;
         y += dy;
         drawCalls += 1
-    }
+    };
 
 
     this.init = function () {
         console.log("Initialising view...");
+        resizeCanvas();
         drawBlocks();
         drawPong();
         str.addEventListener("click", start);

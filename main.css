@@ -1,28 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 canvas {
-    border : 1px solid;
-    margin : 0 auto;
-    width : 100%;
-    display : block;
-    background-color : black;
+    display: block;
+    background-color: black;
 }
 
 header {
     background-color: red;
     color: white;
-    text-align:center;
-    padding:0.2em;
-    font-family: arial;
+    text-align: center;
+    padding: 0.2em;
+    font-family: Courier;
+    font-size: 1em;
     font-weight: bold;
     height: 1.4rem;
+    width: 100%;
     white-space: normal;
 }
 
-body{
-    background-color : white;
 
-}
-
-#game-over{
+#game-over {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
@@ -31,7 +36,7 @@ body{
 
 }
 
-#winner{
+#winner {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
@@ -40,11 +45,12 @@ body{
 }
 
 
-#start{
+#start {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
-    position: absolute; background-color: red;
+    position: absolute;
+    background-color: red;
     border: none;
     color: white;
     border-radius: 1rem;

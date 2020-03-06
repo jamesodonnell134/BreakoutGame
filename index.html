@@ -1,38 +1,33 @@
-<html>
+<!DOCTYPE html>
 <head>
     <title>Breakout Game</title>
     <link rel="stylesheet" type="text/css" href="main.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-
-
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
 </head>
 
-<header id = "brk-header">Breakout Game</header>
-
+<header id="brk-header">Breakout Game</header>
 
 <body>
-
-<button style = " display: inline-block" id = "start" type="button">START GAME</button>
-
+<button style=" display: inline-block" id="start" type="button">START GAME</button>
 
 <div>
-    <span style = "width: 800px; font-weight: bold; text-align: center; background-color: #FF8C00" id = "msg"> </span>
+    <span style="width: 800px; font-weight: bold; text-align: center; background-color: #FF8C00" id="msg"> </span>
 </div>
 
-<div id = "game-over">
-<img style = "width : 15em; height: 15em;" src = "images/gameover.png" alt = "Game over!" id = "gm-ovr">
+<div id="game-over">
+    <img style="width : 15em; height: 15em;" src="images/gameover.png" alt="Game over!" id="gm-ovr">
 </div>
 
-<div id = "winner">
-    <img style = "width : 20em; height: 15em;" src = "images/winner.png" alt = "Winner!" id = "win">
+<div id="winner">
+    <img style="width : 20em; height: 15em;" src="images/winner.png" alt="Winner!" id="win">
 </div>
 
-<canvas id="myCanvas" height="1000rem" width="800px"/>
-<script src="breakoutView.js"></script>;FF8C00
+<canvas id="myCanvas"></canvas>
+<script src="breakoutView.js"></script>
 <script src="breakoutController.js"></script>
 
 </body>
